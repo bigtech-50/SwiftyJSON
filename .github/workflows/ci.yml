@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Build
+        run: xcrun swift build --build-tests
+
+      - name: Run tests
+        run: xcrun swift test
